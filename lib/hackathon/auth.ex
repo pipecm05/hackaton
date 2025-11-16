@@ -1,4 +1,3 @@
-# lib/hackathon/auth.ex
 defmodule Hackathon.Auth do
   use GenServer
 

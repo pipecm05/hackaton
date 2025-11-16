@@ -1,4 +1,3 @@
-# lib/hackathon/chat_system.ex
 defmodule Hackathon.ChatSystem do
   use GenServer
 
@@ -94,7 +93,7 @@ defmodule Hackathon.ChatSystem do
             new_messages = [chat_message | current_messages] |> Enum.take(100)
             new_messages_map = Map.put(state.messages, room_name, new_messages)
 
-            IO.puts("💬 [#{room_name}] #{participant_name}: #{message}")
+            IO.puts(" [#{room_name}] #{participant_name}: #{message}")
             new_state = %{state | messages: new_messages_map}
             {:noreply, new_state}
         end

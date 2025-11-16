@@ -4,16 +4,16 @@ defmodule Hackathon do
   """
 
   def start do
-    IO.puts("🚀 Iniciando Hackathon Code4Future...")
+    IO.puts(" Iniciando Hackathon Code4Future...")
 
     # Solo iniciar la aplicación (sin supervisor duplicado)
     case Hackathon.Application.start(:normal, []) do
       {:ok, _pid} ->
         create_sample_data()
-        IO.puts("✅ Sistema Hackathon iniciado correctamente!")
+        IO.puts(" Sistema Hackathon iniciado correctamente!")
         :ok
       error ->
-        IO.puts("❌ Error iniciando sistema: #{inspect(error)}")
+        IO.puts(" Error iniciando sistema: #{inspect(error)}")
         error
     end
   end
@@ -39,7 +39,7 @@ defmodule Hackathon do
     Hackathon.MentorshipSystem.register_mentor("mentor1", "Dr. Smith", ["IA", "Machine Learning"])
     Hackathon.MentorshipSystem.register_mentor("mentor2", "Ing. Johnson", ["Web Development", "Cloud"])
 
-    IO.puts("📊 Datos de ejemplo creados exitosamente!")
+    IO.puts(" Datos de ejemplo creados exitosamente!")
   end
 
   @doc """

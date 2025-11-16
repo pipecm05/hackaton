@@ -1,4 +1,3 @@
-# lib/hackathon/supervisor.ex
 defmodule Hackathon.Supervisor do
   use Supervisor
 
@@ -15,7 +14,7 @@ defmodule Hackathon.Supervisor do
   end
 
   def init(_init_arg) do
-    IO.puts("🔄 Configurando procesos supervisados...")
+    IO.puts(" Configurando procesos supervisados...")
     children = [
       {Hackathon.Auth, []},
       {Hackathon.CommandHandler, []}

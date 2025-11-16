@@ -1,4 +1,3 @@
-# lib/hackathon/distributed_registry.ex
 defmodule Hackathon.DistributedRegistry do
   use GenServer
 
