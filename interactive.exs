@@ -36,36 +36,35 @@ defmodule HackathonInteractive do
     Enum.each(modules, fn module ->
       if File.exists?(module) do
         Code.compile_file(module)
-        IO.puts("   ✅ #{Path.basename(module)}")
+        IO.puts("#{Path.basename(module)}")
       else
-        IO.puts("   ❌ No encontrado: #{module}")
+        IO.puts(" No encontrado: #{module}")
       end
     end)
 
     # Iniciar sistema
     Hackathon.start()
-    IO.puts("🚀 Sistema Hackathon cargado y listo!")
   end
 
   defp main_menu do
     IO.puts("""
     \n\e[32m
-    🎯 MENÚ PRINCIPAL - ¿QUÉ QUIERES HACER?
+    MENÚ PRINCIPAL - ¿QUÉ QUIERES HACER?
     ========================================
 
-    1. 👥  GESTIÓN DE PARTICIPANTES
-    2. 🏆  GESTIÓN DE EQUIPOS
-    3. 🚀  GESTIÓN DE PROYECTOS
-    4. 💬  SISTEMA DE CHAT
-    5. 👨‍🏫 SISTEMA DE MENTORÍA
-    6. 📊  VER REPORTES DEL SISTEMA
-    7. 🎮  MODO AUTOMÁTICO (DEMO)
-    8. ❌  SALIR
+    1. GESTIÓN DE PARTICIPANTES
+    2. GESTIÓN DE EQUIPOS
+    3. GESTIÓN DE PROYECTOS
+    4. SISTEMA DE CHAT
+    5. SISTEMA DE MENTORÍA
+    6. VER REPORTES DEL SISTEMA
+    7. MODO AUTOMÁTICO (DEMO)
+    8. SALIR
 
     \e[0m
     """)
 
-    IO.write("👉 Selecciona una opción (1-8): ")
+    IO.write("Selecciona una opción (1-8): ")
 
     case IO.read(:line) |> String.trim() do
       "1" -> participantes_menu()
@@ -77,7 +76,7 @@ defmodule HackathonInteractive do
       "7" -> modo_automatico()
       "8" -> salir()
       _ ->
-        IO.puts("\e[31m❌ Opción inválida. Intenta de nuevo.\e[0m")
+        IO.puts("\e[31m Opción inválida. Intenta de nuevo.\e[0m")
         main_menu()
     end
   end
@@ -89,26 +88,26 @@ defmodule HackathonInteractive do
     👥 GESTIÓN DE PARTICIPANTES
     ===========================
 
-    1. 📝 Registrar nuevo participante
-    2. 👀 Ver participantes existentes
-    3. 🔙 Volver al menú principal
+    1. Registrar nuevo participante
+    2. Ver participantes existentes
+    3. Volver al menú principal
     \e[0m
     """)
 
-    IO.write("👉 Selecciona una opción (1-3): ")
+    IO.write("Selecciona una opción (1-3): ")
 
     case IO.read(:line) |> String.trim() do
       "1" -> registrar_participante()
       "2" -> ver_participantes()
       "3" -> main_menu()
       _ ->
-        IO.puts("\e[31m❌ Opción inválida\e[0m")
+        IO.puts("\e[31m Opción inválida\e[0m")
         participantes_menu()
     end
   end
 
   defp registrar_participante do
-    IO.puts("\n📝 REGISTRAR NUEVO PARTICIPANTE")
+    IO.puts("\n REGISTRAR NUEVO PARTICIPANTE")
     IO.write("   ID del participante: ")
     id = IO.read(:line) |> String.trim()
 
@@ -120,18 +119,18 @@ defmodule HackathonInteractive do
 
     case Hackathon.TeamManagement.register_participant(id, nombre, email) do
       {:ok, participante} ->
-        IO.puts("\e[32m✅ Participante registrado: #{participante.name}\e[0m")
+        IO.puts("\e[32m Participante registrado: #{participante.name}\e[0m")
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     participantes_menu()
   end
 
   defp ver_participantes do
-    IO.puts("\n👀 PARTICIPANTES REGISTRADOS:")
+    IO.puts("\n PARTICIPANTES REGISTRADOS:")
     # En un sistema real aquí obtendrías la lista de participantes
-    IO.puts("📊 Función en desarrollo...")
+    IO.puts(" Función en desarrollo...")
     participantes_menu()
   end
 
@@ -139,18 +138,18 @@ defmodule HackathonInteractive do
   defp equipos_menu do
     IO.puts("""
     \n\e[34m
-    🏆 GESTIÓN DE EQUIPOS
+    GESTIÓN DE EQUIPOS
     =====================
 
-    1. 🆕 Crear nuevo equipo
-    2. 👥 Unir participante a equipo
-    3. 📋 Listar todos los equipos
-    4. 🔍 Buscar equipo por categoría
-    5. 🔙 Volver al menú principal
+    1. Crear nuevo equipo
+    2. Unir participante a equipo
+    3. Listar todos los equipos
+    4. Buscar equipo por categoría
+    5. Volver al menú principal
     \e[0m
     """)
 
-    IO.write("👉 Selecciona una opción (1-5): ")
+    IO.write(" Selecciona una opción (1-5): ")
 
     case IO.read(:line) |> String.trim() do
       "1" -> crear_equipo()
@@ -159,7 +158,7 @@ defmodule HackathonInteractive do
       "4" -> buscar_equipos_categoria()
       "5" -> main_menu()
       _ ->
-        IO.puts("\e[31m❌ Opción inválida\e[0m")
+        IO.puts("\e[31m Opción inválida\e[0m")
         equipos_menu()
     end
   end
@@ -180,16 +179,16 @@ defmodule HackathonInteractive do
 
     case Hackathon.TeamManagement.create_team(equipo_id, nombre, creador_id, categoria) do
       {:ok, equipo} ->
-        IO.puts("\e[32m✅ Equipo creado: #{equipo.name} - #{equipo.category}\e[0m")
+        IO.puts("\e[32m Equipo creado: #{equipo.name} - #{equipo.category}\e[0m")
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     equipos_menu()
   end
 
   defp unir_a_equipo do
-    IO.puts("\n👥 UNIR PARTICIPANTE A EQUIPO")
+    IO.puts("\n UNIR PARTICIPANTE A EQUIPO")
     IO.write("   ID del participante: ")
     participante_id = IO.read(:line) |> String.trim()
 
@@ -198,16 +197,16 @@ defmodule HackathonInteractive do
 
     case Hackathon.TeamManagement.join_team(participante_id, equipo_id) do
       {:ok, equipo} ->
-        IO.puts("\e[32m✅ Participante unido al equipo: #{equipo.name}\e[0m")
+        IO.puts("\e[32m Participante unido al equipo: #{equipo.name}\e[0m")
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     equipos_menu()
   end
 
   defp listar_equipos do
-    IO.puts("\n📋 LISTA DE EQUIPOS:")
+    IO.puts("\n LISTA DE EQUIPOS:")
 
     case Hackathon.TeamManagement.list_teams() do
       {:ok, equipos} ->
@@ -215,19 +214,19 @@ defmodule HackathonInteractive do
           IO.puts("   No hay equipos registrados")
         else
           Enum.each(equipos, fn equipo ->
-            IO.puts("   🏆 #{equipo.name} - #{equipo.category} (#{equipo.participant_count} miembros)")
+            IO.puts("  #{equipo.name} - #{equipo.category} (#{equipo.participant_count} miembros)")
           end)
-          IO.puts("   📊 Total: #{length(equipos)} equipos")
+          IO.puts("    Total: #{length(equipos)} equipos")
         end
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     equipos_menu()
   end
 
   defp buscar_equipos_categoria do
-    IO.puts("\n🔍 BUSCAR EQUIPOS POR CATEGORÍA")
+    IO.puts("\n BUSCAR EQUIPOS POR CATEGORÍA")
     IO.write("   Categoría (IA, Web, Mobile, Data, Blockchain): ")
     categoria = IO.read(:line) |> String.trim()
 
@@ -238,11 +237,11 @@ defmodule HackathonInteractive do
         else
           IO.puts("   Equipos en #{categoria}:")
           Enum.each(equipos, fn equipo ->
-            IO.puts("   🏆 #{equipo.name} (#{equipo.participant_count} miembros)")
+            IO.puts("    #{equipo.name} (#{equipo.participant_count} miembros)")
           end)
         end
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     equipos_menu()
@@ -252,18 +251,18 @@ defmodule HackathonInteractive do
   defp proyectos_menu do
     IO.puts("""
     \n\e[34m
-    🚀 GESTIÓN DE PROYECTOS
+     GESTIÓN DE PROYECTOS
     =======================
 
-    1. 🆕 Registrar nuevo proyecto
-    2. 📝 Actualizar avance de proyecto
-    3. 🔍 Ver proyecto de equipo
-    4. 📂 Listar proyectos por categoría
-    5. 🔙 Volver al menú principal
+    1. Registrar nuevo proyecto
+    2. Actualizar avance de proyecto
+    3. Ver proyecto de equipo
+    4. Listar proyectos por categoría
+    5. Volver al menú principal
     \e[0m
     """)
 
-    IO.write("👉 Selecciona una opción (1-5): ")
+    IO.write(" Selecciona una opción (1-5): ")
 
     case IO.read(:line) |> String.trim() do
       "1" -> registrar_proyecto()
@@ -272,13 +271,13 @@ defmodule HackathonInteractive do
       "4" -> listar_proyectos_categoria()
       "5" -> main_menu()
       _ ->
-        IO.puts("\e[31m❌ Opción inválida\e[0m")
+        IO.puts("\e[31m Opción inválida\e[0m")
         proyectos_menu()
     end
   end
 
   defp registrar_proyecto do
-    IO.puts("\n🆕 REGISTRAR NUEVO PROYECTO")
+    IO.puts("\n REGISTRAR NUEVO PROYECTO")
     IO.write("   ID del equipo: ")
     equipo_id = IO.read(:line) |> String.trim()
 
@@ -293,16 +292,16 @@ defmodule HackathonInteractive do
 
     case Hackathon.ProjectRegistry.register_project(equipo_id, nombre, descripcion, categoria) do
       {:ok, proyecto} ->
-        IO.puts("\e[32m✅ Proyecto registrado: #{proyecto.name}\e[0m")
+        IO.puts("\e[32m Proyecto registrado: #{proyecto.name}\e[0m")
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     proyectos_menu()
   end
 
   defp actualizar_proyecto do
-    IO.puts("\n📝 ACTUALIZAR AVANCE DE PROYECTO")
+    IO.puts("\n ACTUALIZAR AVANCE DE PROYECTO")
     IO.write("   ID del equipo: ")
     equipo_id = IO.read(:line) |> String.trim()
 
@@ -310,13 +309,13 @@ defmodule HackathonInteractive do
     mensaje = IO.read(:line) |> String.trim()
 
     :ok = Hackathon.ProjectRegistry.update_project(equipo_id, mensaje)
-    IO.puts("\e[32m✅ Avance registrado para el equipo: #{equipo_id}\e[0m")
+    IO.puts("\e[32m Avance registrado para el equipo: #{equipo_id}\e[0m")
 
     proyectos_menu()
   end
 
   defp ver_proyecto_equipo do
-    IO.puts("\n🔍 VER PROYECTO DE EQUIPO")
+    IO.puts("\n VER PROYECTO DE EQUIPO")
     IO.write("   ID del equipo: ")
     equipo_id = IO.read(:line) |> String.trim()
 
@@ -324,10 +323,10 @@ defmodule HackathonInteractive do
       {:ok, proyecto} ->
         IO.puts("""
         \e[33m
-        🚀 PROYECTO: #{proyecto.name}
-        📋 Descripción: #{proyecto.description}
-        🏷️ Categoría: #{proyecto.category}
-        📊 Actualizaciones: #{length(proyecto.updates)}
+         PROYECTO: #{proyecto.name}
+         Descripción: #{proyecto.description}
+         Categoría: #{proyecto.category}
+         Actualizaciones: #{length(proyecto.updates)}
         \e[0m
         """)
 
@@ -340,7 +339,7 @@ defmodule HackathonInteractive do
         end
 
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     proyectos_menu()
@@ -348,7 +347,7 @@ defmodule HackathonInteractive do
 
   # FUNCIÓN FALTANTE - AÑADIR ESTA
   defp listar_proyectos_categoria do
-    IO.puts("\n📂 LISTAR PROYECTOS POR CATEGORÍA")
+    IO.puts("\n LISTAR PROYECTOS POR CATEGORÍA")
     IO.write("   Categoría (IA, Web, Mobile, Data, Blockchain): ")
     categoria = IO.read(:line) |> String.trim()
 
@@ -359,13 +358,13 @@ defmodule HackathonInteractive do
         else
           IO.puts("   Proyectos en #{categoria}:")
           Enum.each(proyectos, fn proyecto ->
-            IO.puts("   🎯 #{proyecto.name} - Equipo: #{proyecto.team_id}")
-            IO.puts("      📝 #{proyecto.description}")
+            IO.puts("    #{proyecto.name} - Equipo: #{proyecto.team_id}")
+            IO.puts("       #{proyecto.description}")
             IO.puts("")
           end)
         end
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     proyectos_menu()
@@ -375,18 +374,18 @@ defmodule HackathonInteractive do
   defp chat_menu do
     IO.puts("""
     \n\e[34m
-    💬 SISTEMA DE CHAT
+     SISTEMA DE CHAT
     ==================
 
-    1. 🆕 Crear sala de chat
-    2. 🔗 Unirse a sala
-    3. 💬 Enviar mensaje
-    4. 📜 Ver historial de mensajes
-    5. 🔙 Volver al menú principal
+    1. Crear sala de chat
+    2. Unirse a sala
+    3. Enviar mensaje
+    4. Ver historial de mensajes
+    5. Volver al menú principal
     \e[0m
     """)
 
-    IO.write("👉 Selecciona una opción (1-5): ")
+    IO.write(" Selecciona una opción (1-5): ")
 
     case IO.read(:line) |> String.trim() do
       "1" -> crear_sala_chat()
@@ -395,13 +394,13 @@ defmodule HackathonInteractive do
       "4" -> ver_historial_chat()
       "5" -> main_menu()
       _ ->
-        IO.puts("\e[31m❌ Opción inválida\e[0m")
+        IO.puts("\e[31m Opción inválida\e[0m")
         chat_menu()
     end
   end
 
   defp crear_sala_chat do
-    IO.puts("\n🆕 CREAR SALA DE CHAT")
+    IO.puts("\n CREAR SALA DE CHAT")
     IO.write("   Nombre de la sala: ")
     sala = IO.read(:line) |> String.trim()
 
@@ -410,16 +409,16 @@ defmodule HackathonInteractive do
 
     case Hackathon.ChatSystem.create_room(sala, tema) do
       {:ok, _} ->
-        IO.puts("\e[32m✅ Sala creada: #{sala} - #{tema}\e[0m")
+        IO.puts("\e[32m Sala creada: #{sala} - #{tema}\e[0m")
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     chat_menu()
   end
 
   defp unirse_sala_chat do
-    IO.puts("\n🔗 UNIRSE A SALA DE CHAT")
+    IO.puts("\n UNIRSE A SALA DE CHAT")
     IO.write("   Nombre de la sala: ")
     sala = IO.read(:line) |> String.trim()
 
@@ -431,16 +430,16 @@ defmodule HackathonInteractive do
 
     case Hackathon.ChatSystem.join_room(sala, usuario_id, nombre) do
       {:ok, _} ->
-        IO.puts("\e[32m✅ Te uniste a la sala: #{sala}\e[0m")
+        IO.puts("\e[32m Te uniste a la sala: #{sala}\e[0m")
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     chat_menu()
   end
 
   defp enviar_mensaje_chat do
-    IO.puts("\n💬 ENVIAR MENSAJE DE CHAT")
+    IO.puts("\n ENVIAR MENSAJE DE CHAT")
     IO.write("   Sala: ")
     sala = IO.read(:line) |> String.trim()
 
@@ -451,13 +450,13 @@ defmodule HackathonInteractive do
     mensaje = IO.read(:line) |> String.trim()
 
     :ok = Hackathon.ChatSystem.send_message(sala, usuario_id, mensaje)
-    IO.puts("\e[32m✅ Mensaje enviado a #{sala}\e[0m")
+    IO.puts("\e[32m Mensaje enviado a #{sala}\e[0m")
 
     chat_menu()
   end
 
   defp ver_historial_chat do
-    IO.puts("\n📜 VER HISTORIAL DE CHAT")
+    IO.puts("\n VER HISTORIAL DE CHAT")
     IO.write("   Sala: ")
     sala = IO.read(:line) |> String.trim()
 
@@ -471,11 +470,11 @@ defmodule HackathonInteractive do
         else
           IO.puts("   Mensajes en #{sala}:")
           Enum.each(mensajes, fn mensaje ->
-            IO.puts("   💬 #{mensaje.participant_name}: #{mensaje.content}")
+            IO.puts("   #{mensaje.participant_name}: #{mensaje.content}")
           end)
         end
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     chat_menu()
@@ -485,19 +484,19 @@ defmodule HackathonInteractive do
   defp mentoría_menu do
     IO.puts("""
     \n\e[34m
-    👨‍🏫 SISTEMA DE MENTORÍA
-    ======================
+    SISTEMA DE MENTORÍA
+    ===================
 
-    1. 👨‍🏫 Registrar mentor
-    2. 🔗 Asignar mentor a equipo
-    3. ❓ Enviar consulta
-    4. 💡 Enviar feedback
-    5. 📋 Ver feedback de equipo
-    6. 🔙 Volver al menú principal
+    1. Registrar mentor
+    2. Asignar mentor a equipo
+    3. Enviar consulta
+    4. Enviar feedback
+    5. Ver feedback de equipo
+    6. Volver al menú principal
     \e[0m
     """)
 
-    IO.write("👉 Selecciona una opción (1-6): ")
+    IO.write(" Selecciona una opción (1-6): ")
 
     case IO.read(:line) |> String.trim() do
       "1" -> registrar_mentor()
@@ -507,13 +506,13 @@ defmodule HackathonInteractive do
       "5" -> ver_feedback_equipo()
       "6" -> main_menu()
       _ ->
-        IO.puts("\e[31m❌ Opción inválida\e[0m")
+        IO.puts("\e[31m Opción inválida\e[0m")
         mentoría_menu()
     end
   end
 
   defp registrar_mentor do
-    IO.puts("\n👨‍🏫 REGISTRAR MENTOR")
+    IO.puts("\n REGISTRAR MENTOR")
     IO.write("   ID del mentor: ")
     mentor_id = IO.read(:line) |> String.trim()
 
@@ -525,16 +524,16 @@ defmodule HackathonInteractive do
 
     case Hackathon.MentorshipSystem.register_mentor(mentor_id, nombre, especialidades) do
       {:ok, mentor} ->
-        IO.puts("\e[32m✅ Mentor registrado: #{mentor.name}\e[0m")
+        IO.puts("\e[32m Mentor registrado: #{mentor.name}\e[0m")
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     mentoría_menu()
   end
 
   defp asignar_mentor do
-    IO.puts("\n🔗 ASIGNAR MENTOR A EQUIPO")
+    IO.puts("\n ASIGNAR MENTOR A EQUIPO")
     IO.write("   ID del equipo: ")
     equipo_id = IO.read(:line) |> String.trim()
 
@@ -543,16 +542,16 @@ defmodule HackathonInteractive do
 
     case Hackathon.MentorshipSystem.assign_mentor_to_team(equipo_id, mentor_id) do
       {:ok, _} ->
-        IO.puts("\e[32m✅ Mentor asignado al equipo\e[0m")
+        IO.puts("\e[32m Mentor asignado al equipo\e[0m")
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     mentoría_menu()
   end
 
   defp enviar_consulta do
-    IO.puts("\n❓ ENVIAR CONSULTA")
+    IO.puts("\n ENVIAR CONSULTA")
     IO.write("   ID del equipo: ")
     equipo_id = IO.read(:line) |> String.trim()
 
@@ -560,13 +559,13 @@ defmodule HackathonInteractive do
     consulta = IO.read(:line) |> String.trim()
 
     :ok = Hackathon.MentorshipSystem.send_inquiry(equipo_id, consulta)
-    IO.puts("\e[32m✅ Consulta enviada\e[0m")
+    IO.puts("\e[32m Consulta enviada\e[0m")
 
     mentoría_menu()
   end
 
   defp enviar_feedback do
-    IO.puts("\n💡 ENVIAR FEEDBACK")
+    IO.puts("\n ENVIAR FEEDBACK")
     IO.write("   ID del mentor: ")
     mentor_id = IO.read(:line) |> String.trim()
 
@@ -578,16 +577,16 @@ defmodule HackathonInteractive do
 
     case Hackathon.MentorshipSystem.send_feedback(mentor_id, equipo_id, feedback) do
       {:ok, _} ->
-        IO.puts("\e[32m✅ Feedback enviado\e[0m")
+        IO.puts("\e[32m Feedback enviado\e[0m")
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     mentoría_menu()
   end
 
   defp ver_feedback_equipo do
-    IO.puts("\n📋 VER FEEDBACK DE EQUIPO")
+    IO.puts("\n VER FEEDBACK DE EQUIPO")
     IO.write("   ID del equipo: ")
     equipo_id = IO.read(:line) |> String.trim()
 
@@ -598,13 +597,13 @@ defmodule HackathonInteractive do
         else
           IO.puts("   Feedback para el equipo #{equipo_id}:")
           Enum.each(feedbacks, fn fb ->
-            IO.puts("   💡 #{fb.feedback}")
-            IO.puts("      👨‍🏫 Mentor: #{fb.mentor_id}")
+            IO.puts("    #{fb.feedback}")
+            IO.puts("     Mentor: #{fb.mentor_id}")
             IO.puts("")
           end)
         end
       {:error, razon} ->
-        IO.puts("\e[31m❌ Error: #{razon}\e[0m")
+        IO.puts("\e[31m Error: #{razon}\e[0m")
     end
 
     mentoría_menu()
@@ -622,25 +621,25 @@ defmodule HackathonInteractive do
     # Equipos
     case Hackathon.TeamManagement.list_teams() do
       {:ok, equipos} ->
-        IO.puts("👥 EQUIPOS: #{length(equipos)}")
+        IO.puts(" EQUIPOS: #{length(equipos)}")
         Enum.each(equipos, fn equipo ->
-          IO.puts("   🏆 #{equipo.name} - #{equipo.category} (#{equipo.participant_count} miembros)")
+          IO.puts("    #{equipo.name} - #{equipo.category} (#{equipo.participant_count} miembros)")
         end)
-      _ -> IO.puts("👥 EQUIPOS: Error al cargar")
+      _ -> IO.puts(" EQUIPOS: Error al cargar")
     end
 
     # Proyectos por categoría
     categorias = ["Inteligencia Artificial", "Desarrollo Web", "Data Science", "Mobile Development", "Blockchain"]
-    IO.puts("\n🚀 PROYECTOS POR CATEGORÍA:")
+    IO.puts("\n PROYECTOS POR CATEGORÍA:")
     Enum.each(categorias, fn categoria ->
       case Hackathon.ProjectRegistry.get_projects_by_category(categoria) do
         {:ok, proyectos} when proyectos != [] ->
-          IO.puts("   📁 #{categoria}: #{length(proyectos)} proyectos")
+          IO.puts("    #{categoria}: #{length(proyectos)} proyectos")
         _ -> :ok
       end
     end)
 
-    IO.write("\n🔙 Presiona Enter para volver al menú principal...")
+    IO.write("\n Presiona Enter para volver al menú principal...")
     IO.read(:line)
     main_menu()
   end
@@ -649,7 +648,7 @@ defmodule HackathonInteractive do
   defp modo_automatico do
     IO.puts("""
     \n\e[33m
-    🎮 MODO AUTOMÁTICO - DEMOSTRACIÓN COMPLETA
+     MODO AUTOMÁTICO - DEMOSTRACIÓN AUTOMATICA COMPLETA
     ==========================================
     \e[0m
     """)
@@ -709,10 +708,10 @@ defmodule HackathonInteractive do
   defp salir do
     IO.puts("""
     \n\e[36m
-    👋 ¡Gracias por usar Hackathon Code4Future!
-    ==========================================
+    Hackaton finalizado
+    =====================
 
-    ¡Hasta la próxima! 🚀
+    ¡Hasta la próxima!
     \e[0m
     """)
     System.halt(0)

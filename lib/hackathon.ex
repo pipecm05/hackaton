@@ -1,6 +1,6 @@
 defmodule Hackathon do
   @moduledoc """
-  Módulo principal de la aplicación Hackathon Code4Future
+  Módulo principal de la aplicación Hackathon
   """
 
   def start do
